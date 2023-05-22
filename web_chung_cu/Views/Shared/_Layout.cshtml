@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Content/images/logo_icon.png")" />
+    <title>@ViewBag.Title - Cho thuê chung cư an toàn, uy tín</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/boxicons-2.1.0/css/boxicons.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/_base.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/_layout.css")" />
+</head>
+<body>
+    <header class="container header">
+        <a href="@Url.Action("Index", "Home")">
+            <img src="@Url.Content("~/Content/images/logo.png")" alt="" class="header__logo" />
+        </a>
+
+        <ul class="menu">
+            <li class="nav-link menu__item active">
+                <a href="@Url.Action("Index", "Home")" class="menu__item-link">
+                    Trang chủ
+                </a>
+            </li>
+
+            <li class="nav-link menu__item">
+                <a href="@Url.Action("Apartment", "Home")" class="menu__item-link">
+                    Chung cư
+                </a>
+            </li>
+
+            <li class="menu__item">
+                <a href="@Url.Action("News", "Home")" class="menu__item-link">
+                    Tin tức
+                </a>
+            </li>
+
+            <li class="nav-link menu__item">
+                <a href="@Url.Action("About", "Home")" class="menu__item-link">
+                    Giới thiệu
+                </a>
+            </li>
+
+            <li class="nav-link menu__item">
+                <a href="@Url.Action("Contact", "Home")" class="menu__item-link">
+                    Liên hệ
+                </a>
+            </li>
+        </ul>
+
+        <div class="header__right">
+            <form action="" method="post">
+                <div class="input-group header__search-input">
+                    <span class="input-group-text" id="basic-addon1">
+                        <i class="bx bx-search-alt header__search-icon"></i>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Tìm kiếm chung cư" aria-label="apartment" aria-describedby="basic-addon1">
+                </div>
+            </form>
+            <a href="tel:19009090" class="header__contact">Liên hệ ngay</a>
+        </div>
+    </header>
+    <main class="body-content">
+        @RenderBody()
+    </main>
+
+    <footer style="background: url(@Url.Content("~/Content/images/bg_footer.jpg"));" class="footer__wrapper">
+        <div class="container footer">
+            <img src="@Url.Content("~/Content/images/logo_trang.png")" alt="" class="footer__logo" />
+            <p class="footer__desc">Với hơn 10 năm kinh nghiệm, Apartment tự hào là sàn mua bán, giao dịch và quảng cáo bất động sản hàng đầu tại Việt Nam </p>
+
+            <ul class="footer__contact">
+                <li class="footer__contact-item">
+                    <img src="~/Content/images/place_maps.png" class="footer__contact-img" />
+                    <p class="footer__contact-name">Trụ sở chính</p>
+                    <p class="footer__contact-value">Trường đại học Kiến trúc Đà Nẵng</p>
+                </li>
+
+                <li class="footer__contact-item">
+                    <img src="~/Content/images/place_phone.png" class="footer__contact-img" />
+                    <p class="footer__contact-name">Hotline</p>
+                    <p class="footer__contact-value">1900 6666</p>
+                </li>
+
+                <li class="footer__contact-item">
+                    <img src="~/Content/images/place_email.png" class="footer__contact-img" />
+                    <p class="footer__contact-name">Email</p>
+                    <p class="footer__contact-value">support@gmail.com</p>
+                </li>
+            </ul>
+
+            <div class="footer__list">
+                <ul class="footer__list-item">
+                    <li class="footer__item-title">
+                        Thông tin công ty
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" class="footer__item-link">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Apartment", "Home")" class="footer__item-link">Chung cư</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("News", "Home")" class="footer__item-link">Tin tức</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("About", "Home")" class="footer__item-link">Giới thiệu</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Contact", "Home")" class="footer__item-link">Liên hệ</a>
+                    </li>
+                </ul>
+                <ul class="footer__list-item">
+                    <li class="footer__item-title">
+                        Hỗ trợ khách hàng
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer__item-link">Thuê chung cư: 1900 1234 (8:00 - 20:00)</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Hỗ trợ dịch vụ: 1900 1235 (8:00 - 20:00)</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Hỗ trợ thông tin: 1900 1236 (8:00 - 20:00)</a>
+                    </li>
+                </ul>
+                <ul class="footer__list-item">
+                    <li class="footer__item-title">
+                        Chính sách hoạt động
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer__item-link">Nội quy chung cư</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Chính sách bảo trì, sửa chữa</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Chính sách thuê chung cư</a>
+                    </li>
+                </ul>
+                <ul class="footer__list-item">
+                    <li class="footer__item-title">
+                        Kết nối với chúng tôi
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer__item-link">Facebook</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Zalo</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__item-link">Instagram</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="footer__copy">&copy; @DateTime.Now.Year - Lập trình bới toandev020101</p>
+    </footer>
+
+    <div id="back-top">
+        <i class="bx bx-chevron-up"></i>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.6.4.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/_base.js")"></script>
+    <script src="@Url.Content("~/Content/js/_layout.js")"></script>
+    <script src="@Url.Content("~/Content/js/apartment.js")"></script>
+    <script src="@Url.Content("~/Content/js/apartmentDetail.js")"></script>
+</body>
+</html>

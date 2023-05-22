@@ -1,0 +1,173 @@
+﻿@using web_chung_cu.Models
+
+@{
+    ViewBag.Title = "ApartmentDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/apartmentDetail.css")" />
+
+    Room _room = (Room)ViewData["room"];
+}
+
+<div class="container">
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="@Url.Action("Apartment", "Home")">Chung cư</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@_room.title</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-8">
+            <div id="carouselExample" class="carousel slide apartmentDetail__carousel">
+                <div class="carousel-inner">
+                    @{int index = 0;}
+                    @foreach (RoomImage roomImage in _room.roomImages)
+                    {
+                        <div class="carousel-item @(index == 0 ? "active" : "") apartmentDetail__carousel-item">
+                            <img src="~/Content/uploads/@roomImage.name" alt="@roomImage.name">
+                        </div>
+                        index++;
+                    }
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <div class="apartmentDetail__carousel-count">
+                    <span class="apartmentDetail__carousel-number">1</span>
+                    <span>/</span>
+                    <span>@_room.roomImages.LongCount()</span>
+                </div>
+            </div>
+
+            <div class="apartmentDetail__image-list">
+                @{int idx = 0;}
+                @foreach (RoomImage roomImage in _room.roomImages)
+                {
+                    <div class="apartmentDetail__image-item @(idx == 0 ? "active" : "")">
+                        <img src="~/Content/uploads/@roomImage.name" alt="@roomImage.name">
+                    </div>
+                    idx++;
+                }
+            </div>
+
+            <h4 class="apartmentDetail__title">@_room.title</h4>
+            <div class="apartmentDetail__address">
+                <i class='bx bx-map-pin apartmentDetail__address-icon'></i>
+                <p>@_room.apartment.address</p>
+            </div>
+
+            <div class="apartmentDetail__shortDesc">
+                <div class="apartmentDetail__shortDesc-left">
+                    <div class="apartmentDetail__shortDesc-item">
+                        <span class="apartmentDetail__shortDesc-title">Mức giá</span>
+                        <span class="apartmentDetail__shortDesc-value">@(_room.price/1000000) triệu/tháng</span>
+                    </div>
+
+                    <div class="apartmentDetail__shortDesc-item">
+                        <span class="apartmentDetail__shortDesc-title">Diện tích</span>
+                        <span class="apartmentDetail__shortDesc-value">@(_room.area) m2</span>
+                    </div>
+
+                    <div class="apartmentDetail__shortDesc-item">
+                        <span class="apartmentDetail__shortDesc-title">Phòng ngủ</span>
+                        <span class="apartmentDetail__shortDesc-value">@(_room.bedroomNumber) PN</span>
+                    </div>
+
+                    <div class="apartmentDetail__shortDesc-item">
+                        <span class="apartmentDetail__shortDesc-title">Trạng thái</span>
+                        <span class="apartmentDetail__shortDesc-value @(_room.status == 1 ? "box--success" : "box--error")">@(_room.status == 1 ? "Còn trống" : "Đã cho thuê")</span>
+                    </div>
+                </div>
+
+                <div class="apartmentDetail__shortDesc-right">
+                    <i class='bx bx-share-alt apartmentDetail__shortDesc-icon'></i>
+                    <i class='bx bx-error apartmentDetail__shortDesc-icon'></i>
+                    <i class='bx bx-heart apartmentDetail__shortDesc-icon'></i>
+                </div>
+            </div>
+
+            <div class="apartmentDetail__desc">
+                <span class="apartmentDetail__desc-title">Thông tin mô tả</span>
+                <div class="apartmentDetail__desc-content">@Html.Raw(HttpUtility.HtmlDecode(_room.description))</div>
+            </div>
+
+            <div class="apartmentDetail__features">
+                <span class="apartmentDetail__features-title">Đặc điểm chung cư</span>
+                <div class="apartmentDetail__features-content">
+                    <div class="apartmentDetail__features-left">
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bx-area apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Diện tích</span>
+                            </div>
+                            <span class="apartmentDetail__features-item-right">@_room.area m2</span>
+                        </div>
+
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bx-bed apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Số phòng ngủ</span>
+                                </div>
+                            <span class="apartmentDetail__features-item-right">@_room.bedroomNumber phòng</span>
+                        </div>
+
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bx-bath apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Số phòng vệ sinh</span>
+                            </div>
+                            <span class="apartmentDetail__features-item-right">@_room.toletNumber phòng</span>
+                        </div>
+                    </div>
+
+                    <div class="apartmentDetail__features-right">
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bxs-institution apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Nội thất</span>
+                            </div>
+                            <span class="apartmentDetail__features-item-right">@(_room.isInterior == 1 ? "Đầy đủ nội thất" : "Chưa có nội thất")</span>
+                        </div>
+
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bx-dollar-circle apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Mức giá</span>
+                            </div>
+                            <span class="apartmentDetail__features-item-right">@(_room.price/1000000) triệu/tháng</span>
+                        </div>
+
+                        <div class="apartmentDetail__features-item">
+                            <div class="apartmentDetail__features-item-left">
+                                <i class='bx bx-dollar-circle apartmentDetail__features-icon'></i>
+                                <span class="apartmentDetail__features-name">Mức giá cọc</span>
+                            </div>
+                            <span class="apartmentDetail__features-item-right">@(_room.pricePile/1000000) triệu/tháng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="apartmentDetail__info">
+                <img class="apartmentDetail__info-avatar" src="@Url.Content(_room.apartment.user.avatar != null ? "~/Content/uploads/" + _room.apartment.user.avatar : "~/Content/images/no-avatar.png")" alt="@_room.apartment.user.FullName()" />
+                <span class="apartmentDetail__info-by">Được đăng bởi</span>
+                <span class="apartmentDetail__info-name">@_room.apartment.user.FullName()</span>
+                <button type="button" class="btn btn-primary">
+                    <a href="tel:@_room.apartment.user.phoneNumber">Gọi điện: @_room.apartment.user.phoneNumber</a>
+                </button>
+                <button type="button" class="btn btn-light apartmentDetail__info-email">
+                    <a href="mailto:@_room.apartment.user.email">Gửi email: @_room.apartment.user.email</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

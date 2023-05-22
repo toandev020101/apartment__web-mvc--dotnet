@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/news.css")" />
+}
+
+<div class="container">
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tin tức</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <span class="news__view-title">Tin tức xem nhiều</span>
+
+            <div class="news__view-list">
+                <a href="#" class="news__view-item">
+                    <img src="@Url.Content("~/Content/images/news1.jpg")" class="news__view-item-img" />
+                    <span class="news__view-item-title">Sky89 còn liền kề trung tâm hành chính hàng đầu Đông Nam Á</span>
+                </a>
+
+                <a href="#" class="news__view-item">
+                    <img src="@Url.Content("~/Content/images/news2.jpg")" class="news__view-item-img" />
+                    <span class="news__view-item-title">Về quy định của pháp luật về đất đai liên quan đến tích tụ, tập trung đất đai</span>
+                </a>
+
+                <a href="#" class="news__view-item">
+                    <img src="@Url.Content("~/Content/images/news3.jpg")" class="news__view-item-img" />
+                    <span class="news__view-item-title">Ưu thế của những căn hộ có diện tích lớn khi được đưa vào sử dụng</span>
+                </a>
+
+                <a href="#" class="news__view-item">
+                    <img src="@Url.Content("~/Content/images/news4.jpg")" class="news__view-item-img" />
+                    <span class="news__view-item-title">Chính sách ưu đãi có một không hai khi đầu tư BĐS nghỉ dưỡng tại Khánh Hòa</span>
+                </a>
+
+                <a href="#" class="news__view-item">
+                    <img src="@Url.Content("~/Content/images/news5.jpg")" class="news__view-item-img" />
+                    <span class="news__view-item-title">
+                        Hà Nội phê duyệt chỉ giới đường đỏ tuyến đường khu đô thị Gia Lâm tới ga Phú Thị
+                    </span>
+                </a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="news__list">
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news1.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Sky89 còn liền kề trung tâm hành chính hàng đầu Đông Nam Á</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">15/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Venice luôn đứng đầu trong danh sách những thành phố lãng mạn nhất không chỉ ở Italy mà trên toàn thế giới. Và nói đến Sky89 người ta sẽ liên tưởng ngay “siêu phẩm” với thành phố Venice xinh đẹp của nước Ý uống quanh bởi sông nước, mở ra không gian thiên nhiên xanh mát giữa ồn ào phố thị.
+                            Sky89 được thiên nhiên ưu ái khi sở hữu vị thế đẹp khi tọa lạc trên con đường “tỷ đô” Đào Trí và trực diện tại khúc quanh đẹp và rộng nhất của sông Sài Gòn. Sống tại Sky89, mở cửa bên này có thể ngắm sông nước, bước ra cửa bên kia là không gian cầu Phú Mỹ lộng gió hay phóng tầm mắt về khu đô thị Phú Mỹ Hưng sầm uất hiện đại.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news2.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Về quy định của pháp luật về đất đai liên quan đến tích tụ, tập trung đất đai</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">16/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Mỗi người một sở thích, một nhu cầu khác nhau cùng chung sống trong một diện tích chật hẹp đã nhiều lần khiến các thành viên trong gia đình “bằng mặt nhưng không bẳng lòng”.
+                            Văn hóa người Việt xưa nay vẫn luôn khuyến khích ông bà, bố mẹ sống chung với con cái trong một mái nhà. Bởi gia đình càng vượng thì xã hội càng phát triển. Tuy nhiên, xã hội hiện đại ngày nay lại khiến việc này nảy sinh ra nhiểu vấn đề oái oăm.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news3.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Ưu thế của những căn hộ có diện tích lớn khi được đưa vào sử dụng</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">18/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Tổng cục Du lịch dự báo năm 2018 du lịch Việt Nam dự kiến đón 15,5-16 triệu lượt khách quốc tế, tổng thu ước tính 620 nghìn tỷ đồng. Trong trong 7 tháng đầu năm lượng du khách quốc tế đến Việt Nam đạt 9 triệu lượt, tăng 25,4% so với cùng kỳ năm 2017. Đây là thị trường đầy tiềm năng và thực sự hấp dẫn các nhà đầu tư bất động sản nghỉ dưỡng, biết lựa chọn cơ hội, thời điểm và phương thức đầu tư khôn ngoan.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news1.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Sky89 còn liền kề trung tâm hành chính hàng đầu Đông Nam Á</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">15/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Venice luôn đứng đầu trong danh sách những thành phố lãng mạn nhất không chỉ ở Italy mà trên toàn thế giới. Và nói đến Sky89 người ta sẽ liên tưởng ngay “siêu phẩm” với thành phố Venice xinh đẹp của nước Ý uống quanh bởi sông nước, mở ra không gian thiên nhiên xanh mát giữa ồn ào phố thị.
+                            Sky89 được thiên nhiên ưu ái khi sở hữu vị thế đẹp khi tọa lạc trên con đường “tỷ đô” Đào Trí và trực diện tại khúc quanh đẹp và rộng nhất của sông Sài Gòn. Sống tại Sky89, mở cửa bên này có thể ngắm sông nước, bước ra cửa bên kia là không gian cầu Phú Mỹ lộng gió hay phóng tầm mắt về khu đô thị Phú Mỹ Hưng sầm uất hiện đại.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news2.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Về quy định của pháp luật về đất đai liên quan đến tích tụ, tập trung đất đai</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">16/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Mỗi người một sở thích, một nhu cầu khác nhau cùng chung sống trong một diện tích chật hẹp đã nhiều lần khiến các thành viên trong gia đình “bằng mặt nhưng không bẳng lòng”.
+                            Văn hóa người Việt xưa nay vẫn luôn khuyến khích ông bà, bố mẹ sống chung với con cái trong một mái nhà. Bởi gia đình càng vượng thì xã hội càng phát triển. Tuy nhiên, xã hội hiện đại ngày nay lại khiến việc này nảy sinh ra nhiểu vấn đề oái oăm.
+                        </p>
+                    </div>
+                </a>
+
+                <a href="#" class="news__item">
+                    <img src="@Url.Content("~/Content/images/news3.jpg")" class="news__item-img" />
+                    <div>
+                        <span class="news__item-title">Ưu thế của những căn hộ có diện tích lớn khi được đưa vào sử dụng</span>
+                        <div class="news__item-date">
+                            <i class="bx bxs-calendar news__item-icon"></i>
+                            <span class="news__item-text">18/05/2023</span>
+                        </div>
+                        <p class="news__item-desc">
+                            Tổng cục Du lịch dự báo năm 2018 du lịch Việt Nam dự kiến đón 15,5-16 triệu lượt khách quốc tế, tổng thu ước tính 620 nghìn tỷ đồng. Trong trong 7 tháng đầu năm lượng du khách quốc tế đến Việt Nam đạt 9 triệu lượt, tăng 25,4% so với cùng kỳ năm 2017. Đây là thị trường đầy tiềm năng và thực sự hấp dẫn các nhà đầu tư bất động sản nghỉ dưỡng, biết lựa chọn cơ hội, thời điểm và phương thức đầu tư khôn ngoan.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+﻿.dashboard__box-item {
+    display: flex;
+    gap: 40px;
+}
+
+.box--info {
+    color: var(--info-color);
+}
+
+.box--warning {
+    color: var(--warning-color);
+}
+
+.box--success {
+    color: var(--success-color);
+}
+
+.box--error {
+    color: var(--error-color);
+}
+
+.dashboard__box-icon {
+    font-size: 60px;
+}
+
+.dashboard__box-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dashboard__box-title {
+    font-weight: 500;
+}

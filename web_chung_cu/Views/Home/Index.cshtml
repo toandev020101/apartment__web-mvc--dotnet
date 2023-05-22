@@ -1,0 +1,365 @@
+﻿@using web_chung_cu.Models
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Aparetment";
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/home.css")" />
+
+    List<Room> _roomHots = ViewData["roomHots"] != null ? (List<Room>)ViewData["roomHots"] : new List<Room>();
+    List<Room> _roomNews = ViewData["roomNews"] != null ? (List<Room>)ViewData["roomNews"] : new List<Room>();
+    List<Room> _roomViews = ViewData["roomViews"] != null ? (List<Room>)ViewData["roomViews"] : new List<Room>();
+}
+
+<!--Slider-->
+<div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active home__carousel">
+            <div class="home__carousel-bg"></div>
+            <img src="@Url.Content("~/Content/images/slider1.jpg")" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block home__carousel-caption">
+                <i class='bx bxl-slack home__carousel-icon'></i>
+                <p class="home__carousel-title">Aparment corporation</p>
+                <h5 class="home__carousel-name">Aparment</h5>
+                <p class="home__carousel-desc">Apartment là viên kim cương hội tụ tinh hoa của những thành phố biểu tượng, nơi nâng tầm đẳng cấp thượng lưu của mỗi cư dân thành một nghệ thuật sống</p>
+            </div>
+
+        </div>
+        <div class="carousel-item home__carousel">
+            <div class="home__carousel-bg"></div>
+            <img src="@Url.Content("~/Content/images/slider2.jpg")" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block home__carousel-caption">
+                <i class='bx bxl-slack home__carousel-icon'></i>
+                <p class="home__carousel-title">Aparment corporation</p>
+                <h5 class="home__carousel-name">Aparment</h5>
+                <p class="home__carousel-desc">Apartment là viên kim cương hội tụ tinh hoa của những thành phố biểu tượng, nơi nâng tầm đẳng cấp thượng lưu của mỗi cư dân thành một nghệ thuật sống</p>
+            </div>
+
+        </div>
+        <div class="carousel-item home__carousel">
+            <div class="home__carousel-bg"></div>
+            <img src="@Url.Content("~/Content/images/slider3.jpg")" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block home__carousel-caption">
+                <i class='bx bxl-slack home__carousel-icon'></i>
+                <p class="home__carousel-title">Aparment corporation</p>
+                <h5 class="home__carousel-name">Aparment</h5>
+                <p class="home__carousel-desc">Apartment là viên kim cương hội tụ tinh hoa của những thành phố biểu tượng, nơi nâng tầm đẳng cấp thượng lưu của mỗi cư dân thành một nghệ thuật sống</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!--Slider-->
+<!--Search-->
+<div class="home__search-wrapper">
+    <div class="container home__search">
+        <div class="home__search-item">
+            <span class="home__search-title">Chọn tỉnh/Thành phố</span>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>--Tỉnh/Thành phố--</option>
+                <option value="1">Hà Nội</option>
+                <option value="2">Đà Nẵng</option>
+                <option value="3">Hồ Chí Minh</option>
+            </select>
+        </div>
+        <div class="home__search-item">
+            <span class="home__search-title">Chọn quận/Huyện</span>
+            <select class="form-select" aria-label="Default select example">
+                <option selected>--Quận/Huyện--</option>
+                <option value="1">Quận 1</option>
+                <option value="2">Quận 2</option>
+                <option value="3">Huyện Quỳnh Lưu</option>
+            </select>
+        </div>
+        <div class="home__search-item">
+            <span class="home__search-title">Từ khóa</span>
+            <input type="text" class="form-control" placeholder="Từ khóa" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
+        <div class="home__search-btn-wrapper">
+            <button class="btn btn-primary home__search-btn" type="submit">
+                <i class="bx bx-search-alt home__search-icon"></i>
+                <span>Tìm kiếm</span>
+            </button>
+        </div>
+    </div>
+</div>
+<!--Search-->
+<!--Hot-->
+<div class="container home__section">
+    <span class="home__section-title">Chung cư nổi bật nhất</span>
+    <p class="home__section-desc">Tổng hợp các chung cư tại Hà Nội, Đà Nẵng, TP Hồ Chí Minh...và cách tỉnh thành khác hot nhất thời điểm hiện tại</p>
+
+    <div class="container home__section-list">
+        <div class="carousel-multiple-wrapper">
+            <i id="carousel-multiple-control-prev" class="bx bx-chevron-left carousel-multiple-control"></i>
+            <ul class="carousel-multiple" data-slide-number="3">
+                @foreach (Room room in _roomHots)
+                {
+                    <li class="carousel-multiple-item">
+                        <a href="@Url.Action("ApartmentDetail", "Home", new { slug = room.slug })">
+                            <div class="card">
+                                <div class="card-img-wrapper">
+                                    <img src="~/Content/uploads/@room.imageName" class="card-img-top" alt="@room.imageName">
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">@room.title</h6>
+                                    <span class="card-price">@room.price.ToString("C0", CultureInfo.GetCultureInfo("vi-VN"))</span>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-map-pin card-icon"></i>
+                                        <span>@room.apartment.address</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-area card-icon"></i>
+                                        <span>@room.area m2</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bed card-icon"></i>
+                                        <span>@room.bedroomNumber phòng ngủ</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bath card-icon"></i>
+                                        <span>@room.toletNumber phòng vệ sinh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <i id="carousel-multiple-control-next" class="bx bx-chevron-right carousel-multiple-control"></i>
+        </div>
+    </div>
+</div>
+<!--Hot-->
+<!--Why-->
+<div class="home__why" style="background: url(@Url.Content("~/Content/images/bg_why.png"));">
+    <div class="container home__section">
+        <span class="home__section-title">Vì sao bạn chọn chung cư Apartment ? </span>
+        <p class="home__section-desc">Chúng tôi cung cấp đầy đủ và chính xác nhất thông tin các dự án bất động sản trên toàn quốc song hành với dịch vụ tư vấn nhanh chóng và hiệu quả </p>
+
+        <div class="home__why-list">
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why1.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Chất lượng tốt nhất</span>
+                    <span class="home__why-desc">Nghiên cứu, thiết kế và đầu tư xây dựng với hệ thống dịch vụ với chất lượng tốt nhất</span>
+                </div>
+            </div>
+
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why3.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Kết nối với nhà đầu tư</span>
+                    <span class="home__why-desc">Nhà đầu tư sẽ mang đến những sản phẩm và dịch vụ tốt nhất đáp ứng nhu cầu của bạn</span>
+                </div>
+            </div>
+
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why5.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Đảm bảo quyền lợi khách hàng</span>
+                    <span class="home__why-desc">Thực hiện các chương trình chăm sóc và gia tăng lợi ích cho khách hàng</span>
+                </div>
+            </div>
+
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why2.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Tìm kiếm thông tin dễ dàng</span>
+                    <span class="home__why-desc">Tìm kiếm bất động sản bạn muốn theo danh mục cực kì dễ dàng</span>
+                </div>
+            </div>
+
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why4.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Tối ưu hóa dịch vụ</span>
+                    <span class="home__why-desc">Nghiên cứu, phân tích đánh giá nhu cầu của khách hàng một cách sâu sắc</span>
+                </div>
+            </div>
+
+            <div class="home__why-item">
+                <img src="~/Content/images/img_why6.png" class="home__why-icon" />
+                <div class="home__why-content">
+                    <span class="home__why-name">Tiết kiệm thời gian chi chí</span>
+                    <span class="home__why-desc">Cập nhật giá cả nhanh chóng và chính xác giúp bạn tiết kiệm chi phí hơn nhiều</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Why-->
+<!--New-->
+<div class="container home__section">
+    <span class="home__section-title">Chung cư mới nhất</span>
+
+    <div class="container home__section-list">
+        <div class="carousel-multiple-wrapper">
+            <i id="carousel-multiple-control-prev" class="bx bx-chevron-left carousel-multiple-control"></i>
+            <ul class="carousel-multiple" data-slide-number="4">
+                @foreach (Room room in _roomNews)
+                {
+                    <li class="carousel-multiple-item">
+                        <a href="@Url.Action("ApartmentDetail", "Home", new {slug = room.slug})">
+                            <div class="card">
+                                <div class="card-img-wrapper">
+                                    <img src="~/Content/uploads/@room.imageName" class="card-img-top" alt="@room.imageName">
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">@room.title</h6>
+                                    <span class="card-price">@room.price.ToString("C0", CultureInfo.GetCultureInfo("vi-VN"))</span>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-map-pin card-icon"></i>
+                                        <span>@room.apartment.address</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-area card-icon"></i>
+                                        <span>@room.area m2</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bed card-icon"></i>
+                                        <span>@room.bedroomNumber phòng ngủ</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bath card-icon"></i>
+                                        <span>@room.toletNumber phòng vệ sinh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <i id="carousel-multiple-control-next" class="bx bx-chevron-right carousel-multiple-control"></i>
+        </div>
+    </div>
+</div>
+<!--New-->
+<!--View-->
+<div class="container home__section">
+    <span class="home__section-title">Chung cư được xem nhiều</span>
+
+    <div class="container home__section-list">
+        <div class="carousel-multiple-wrapper">
+            <i id="carousel-multiple-control-prev" class="bx bx-chevron-left carousel-multiple-control"></i>
+            <ul class="carousel-multiple" data-slide-number="4">
+                @foreach (Room room in _roomViews)
+                {
+                    <li class="carousel-multiple-item">
+                        <a href="@Url.Action("ApartmentDetail", "Home", new {slug = room.slug})">
+                            <div class="card">
+                                <div class="card-img-wrapper">
+                                    <img src="~/Content/uploads/@room.imageName" class="card-img-top" alt="@room.imageName">
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title">@room.title</h6>
+                                    <span class="card-price">@room.price.ToString("C0", CultureInfo.GetCultureInfo("vi-VN"))</span>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-map-pin card-icon"></i>
+                                        <span>@room.apartment.address</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-area card-icon"></i>
+                                        <span>@room.area m2</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bed card-icon"></i>
+                                        <span>@room.bedroomNumber phòng ngủ</span>
+                                    </div>
+
+                                    <div class="card-atrr">
+                                        <i class="bx bx-bath card-icon"></i>
+                                        <span>@room.toletNumber phòng vệ sinh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                }
+            </ul>
+            <i id="carousel-multiple-control-next" class="bx bx-chevron-right carousel-multiple-control"></i>
+        </div>
+    </div>
+</div>
+<!--View-->
+<!--Subscribe-->
+<div class="home__subscribe" style="background: url(@Url.Content("~/Content/images/bg_subscribe.png"));">
+    <div class="container home__section">
+        <span class="home__section-title">Nhận thông tin nhà đất miễn phí </span>
+        <p class="home__section-desc">Cập nhật hơn 1.000.000 thông tin mua bán và giao dịch nhà đất mỗi tháng tại 63 tỉnh thành phố trên cả nước </p>
+
+        <div class="home__subscribe-group">
+            <input type="email" class="form-control home__subscribe-input" placeholder="Nhập địa chỉ email của bạn">
+            <button type="button" class="btn btn-primary">Nhận tin miễn phí</button>
+        </div>
+    </div>
+</div>
+<!--Subscribe-->
+<!--News-->
+<div class="container home__section">
+    <span class="home__section-title">Tin tức thị trường</span>
+
+    <div class="container home__section-list home__news-list">
+        <a href="#" class="home__news-item">
+            <img src="@Url.Content("~/Content/images/news1.jpg")" class="home__news-img" />
+            <span class="home__news-title">Sky89 còn liền kề trung tâm hành chính hàng đầu Đông Nam Á</span>
+            <p class="home__news-desc">
+                Venice luôn đứng đầu trong danh sách những thành phố lãng mạn nhất không chỉ ở Italy mà trên toàn thế giới. Và nói đến Sky89 người ta sẽ liên tưởng ngay “siêu phẩm” với thành phố Venice xinh đẹp của nước Ý uống quanh bởi sông nước, mở ra không gian thiên nhiên xanh mát giữa ồn ào phố thị.
+                Sky89 được thiên nhiên ưu ái khi sở hữu vị thế đẹp khi tọa lạc trên con đường “tỷ đô” Đào Trí và trực diện tại khúc quanh đẹp và rộng nhất của sông Sài Gòn. Sống tại Sky89, mở cửa bên này có thể ngắm sông nước, bước ra cửa bên kia là không gian cầu Phú Mỹ lộng gió hay phóng tầm mắt về khu đô thị Phú Mỹ Hưng sầm uất hiện đại.
+            </p>
+            <div class="home__news-date">
+                <i class="bx bxs-calendar home__news-icon"></i>
+                <span class="home__news-text">15/05/2023</span>
+            </div>
+        </a>
+
+        <a href="#" class="home__news-item">
+            <img src="@Url.Content("~/Content/images/news2.jpg")" class="home__news-img" />
+            <span class="home__news-title">Về quy định của pháp luật về đất đai liên quan đến tích tụ, tập trung đất đai</span>
+            <p class="home__news-desc">
+                Mỗi người một sở thích, một nhu cầu khác nhau cùng chung sống trong một diện tích chật hẹp đã nhiều lần khiến các thành viên trong gia đình “bằng mặt nhưng không bẳng lòng”.
+                Văn hóa người Việt xưa nay vẫn luôn khuyến khích ông bà, bố mẹ sống chung với con cái trong một mái nhà. Bởi gia đình càng vượng thì xã hội càng phát triển. Tuy nhiên, xã hội hiện đại ngày nay lại khiến việc này nảy sinh ra nhiểu vấn đề oái oăm.
+            </p>
+            <div class="home__news-date">
+                <i class="bx bxs-calendar home__news-icon"></i>
+                <span class="home__news-text">16/05/2023</span>
+            </div>
+        </a>
+
+        <a href="#" class="home__news-item">
+            <img src="@Url.Content("~/Content/images/news3.jpg")" class="home__news-img" />
+            <span class="home__news-title">Ưu thế của những căn hộ có diện tích lớn khi được đưa vào sử dụng</span>
+            <p class="home__news-desc">
+                Tổng cục Du lịch dự báo năm 2018 du lịch Việt Nam dự kiến đón 15,5-16 triệu lượt khách quốc tế, tổng thu ước tính 620 nghìn tỷ đồng. Trong trong 7 tháng đầu năm lượng du khách quốc tế đến Việt Nam đạt 9 triệu lượt, tăng 25,4% so với cùng kỳ năm 2017. Đây là thị trường đầy tiềm năng và thực sự hấp dẫn các nhà đầu tư bất động sản nghỉ dưỡng, biết lựa chọn cơ hội, thời điểm và phương thức đầu tư khôn ngoan.
+            </p>
+            <div class="home__news-date">
+                <i class="bx bxs-calendar home__news-icon"></i>
+                <span class="home__news-text">18/05/2023</span>
+            </div>
+        </a>
+    </div>
+</div>
+<!--News-->

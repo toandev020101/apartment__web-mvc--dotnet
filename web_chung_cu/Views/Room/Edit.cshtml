@@ -1,0 +1,138 @@
+﻿@model web_chung_cu.Models.Room
+@using web_chung_cu.Models
+
+@{
+    ViewBag.Title = "Chỉnh sửa một phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h5>Chỉnh sửa</h5>
+
+<form action="@Url.Action("Edit", "Room", Model.id)" method="post" class="box" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3">
+        <div class="col-6">
+            <label for="image" class="form-label">Ảnh phòng</label>
+            <input type="file" class="form-control " name="image" id="image">
+        </div>
+
+        <div class="col-6">
+            <label for="libraryImage" class="form-label">Thư viện ảnh</label>
+            <input type="file" multiple class="form-control" name="libraryImage" id="libraryImage">
+        </div>
+
+        <div class="col-6">
+            <label for="roomNumber" class="form-label">Số phòng *</label>
+            <input type="number" min="0" max="9999" class="form-control @(ViewData.ModelState["roomNumber"] != null && ViewData.ModelState["roomNumber"].Errors.Count > 0 ? "is-invalid" : "")" name="roomNumber" id="roomNumber" value="@(Request.Form["roomNumber"] != null ? Request.Form["roomNumber"] : Model.roomNumber.ToString())">
+            @Html.ValidationMessageFor(r => r.roomNumber, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="floorNumber" class="form-label">Số tầng *</label>
+            <input type="number" min="0" max="99" class="form-control @(ViewData.ModelState["floorNumber"] != null && ViewData.ModelState["floorNumber"].Errors.Count > 0 ? "is-invalid" : "")" name="floorNumber" id="floorNumber" value="@(Request.Form["floorNumber"] != null ? Request.Form["floorNumber"] : Model.floorNumber.ToString())">
+            @Html.ValidationMessageFor(r => r.floorNumber, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="title" class="form-label">Tiêu đề *</label>
+            <input class="form-control input__convert-to-slug @(ViewData.ModelState["title"] != null && ViewData.ModelState["title"].Errors.Count > 0 ? "is-invalid" : "")" name="title" id="title" value="@(Request.Form["title"] != null ? Request.Form["title"] : Model.title)">
+            @Html.ValidationMessageFor(r => r.title, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="slug" class="form-label">Đường dẫn *</label>
+            <input class="form-control input__slug @(ViewData.ModelState["slug"] != null && ViewData.ModelState["slug"].Errors.Count > 0 ? "is-invalid" : "")" name="slug" id="slug" value="@(Request.Form["slug"] != null ? Request.Form["slug"] : Model.slug)">
+            @Html.ValidationMessageFor(r => r.slug, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="price" class="form-label">Giá *</label>
+            <div class="input-group">
+                <input type="number" min="0" step="10000" class="form-control @(ViewData.ModelState["price"] != null && ViewData.ModelState["price"].Errors.Count > 0 ? "is-invalid" : "")" name="price" id="price" value="@(Request.Form["price"] != null ? Request.Form["price"] : Model.price.ToString())">
+                <span class="input-group-text" id="basic-addon2">VNĐ</span>
+            </div>
+            @Html.ValidationMessageFor(r => r.price, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="pricePile" class="form-label">Giá cọc *</label>
+            <div class="input-group">
+                <input type="number" min="0" step="10000" class="form-control @(ViewData.ModelState["pricePile"] != null && ViewData.ModelState["pricePile"].Errors.Count > 0 ? "is-invalid" : "")" name="pricePile" id="pricePile" value="@(Request.Form["pricePile"] != null ? Request.Form["pricePile"] : Model.pricePile.ToString())">
+                <span class="input-group-text" id="basic-addon2">VNĐ</span>
+            </div>
+            @Html.ValidationMessageFor(r => r.pricePile, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="bedroomNumber" class="form-label">Số phòng ngủ *</label>
+            <input type="number" min="0" max="99" class="form-control @(ViewData.ModelState["bedroomNumber"] != null && ViewData.ModelState["bedroomNumber"].Errors.Count > 0 ? "is-invalid" : "")" name="bedroomNumber" id="bedroomNumber" value="@(Request.Form["bedroomNumber"] != null ? Request.Form["bedroomNumber"] : Model.bedroomNumber.ToString())">
+            @Html.ValidationMessageFor(r => r.bedroomNumber, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="toletNumber" class="form-label">Số phòng vệ sinh *</label>
+            <input type="number" min="0" max="99" class="form-control @(ViewData.ModelState["toletNumber"] != null && ViewData.ModelState["toletNumber"].Errors.Count > 0 ? "is-invalid" : ""))" name="toletNumber" id="toletNumber" value="@(Request.Form["toletNumber"] != null ? Request.Form["toletNumber"] : Model.toletNumber.ToString())">
+            @Html.ValidationMessageFor(r => r.toletNumber, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="area" class="form-label">Diện tích *</label>
+            <div class="input-group">
+                <input type="number" min="0" max="9999" class="form-control @(ViewData.ModelState["area"] != null && ViewData.ModelState["area"].Errors.Count > 0 ? "is-invalid" : "")" name="area" id="area" value="@(Request.Form["area"] != null ? Request.Form["area"] : Model.area.ToString())">
+                <span class="input-group-text" id="basic-addon2">M2</span>
+            </div>
+            @Html.ValidationMessageFor(r => r.area, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="isInterior" class="form-label">Nội thất *</label>
+            <select class="form-select @(ViewData.ModelState["isInterior"] != null && ViewData.ModelState["isInterior"].Errors.Count > 0 ? "is-invalid" : "")" aria-label="Default select example" name="isInterior" id="isInterior">
+                <option value="-1" @((Request.Form["isInterior"] != null ? Request.Form["isInterior"] : Model.isInterior.ToString()) == "-1" ? "selected" : "")>-- Chọn nội thất --</option>
+                <option value="1" @((Request.Form["isInterior"] != null ? Request.Form["isInterior"] : Model.isInterior.ToString()) == "1" ? "selected" : "")>Đầy đủ nội thất</option>
+                <option value="0" @((Request.Form["isInterior"] != null ? Request.Form["isInterior"] : Model.isInterior.ToString()) == "0" ? "selected" : "")>Chưa có nội thất</option>
+            </select>
+            @Html.ValidationMessageFor(r => r.isInterior, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="apartmentId" class="form-label">Chung cư *</label>
+            <select class="form-select @(ViewData.ModelState["apartmentId"] != null && ViewData.ModelState["apartmentId"].Errors.Count > 0 ? "is-invalid" : "")" aria-label="Default select example" name="apartmentId" id="apartmentId">
+                <option value="-1" @((Request.Form["apartmentId"] != null ? Request.Form["apartmentId"] : Model.apartmentId.ToString()) == "-1" ? "selected" : "")>-- Chọn chung cư --</option>
+                @if (ViewData["apartments"] != null)
+                {
+                    foreach (Apartment apartment in (List<Apartment>)ViewData["apartments"])
+                    {
+                        <option value="@apartment.id" @((Request.Form["apartmentId"] != null ? Request.Form["apartmentId"] : Model.apartmentId.ToString()) == apartment.id.ToString() ? "selected" : "")>@apartment.name</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(r => r.apartmentId, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="status" class="form-label">Trạng thái *</label>
+            <select class="form-select @(ViewData.ModelState["status"] != null && ViewData.ModelState["status"].Errors.Count > 0 ? "is-invalid" : "")" aria-label="Default select example" name="status" id="status">
+                <option value="-1" @((Request.Form["status"] != null ? Request.Form["status"] : Model.status.ToString()) == "-1" ? "selected" : "")>-- Chọn trạng thái --</option>
+                <option value="1" @((Request.Form["status"] != null ? Request.Form["status"] : Model.status.ToString()) == "1" ? "selected" : "")>Còn trống</option>
+                <option value="0" @((Request.Form["status"] != null ? Request.Form["status"] : Model.status.ToString()) == "0" ? "selected" : "")>Đã cho thuê</option>
+            </select>
+            @Html.ValidationMessageFor(r => r.status, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-12">
+            <label for="description" class="form-label">Mô tả</label>
+            <textarea class="form-control" id="description" rows="3" name="description">@HttpUtility.HtmlDecode(Model.description)</textarea>
+        </div>
+    </div>
+
+    <div class="btn__wrapper">
+        <button type="submit" class="btn btn-primary btn-sm">Chỉnh sửa</button>
+        <a href="@Url.Action("Index", "Room")" class="btn btn-danger btn-sm">Hủy</a>
+    </div>
+</form>
+
+<script src="@Url.Content("~/Content/ckeditor/ckeditor.js")"></script>
+<script>
+    CKEDITOR.replace("description");
+</script>

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Quản trị hệ thống";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/dashboard.css")" />
+
+    int _apartmentCount = (int)ViewData["apartmentCount"];
+    int _roomCount = (int)ViewData["roomCount"];
+    int _roomIsRentCount = (int)ViewData["roomIsRentCount"];
+    int _roomNotIsRentCount = (int)ViewData["roomNotIsRentCount"];
+}
+
+<h5>Quản trị hệ thống</h5>
+
+<div class="row">
+    <div class="col-3">
+        <div class="box box--info dashboard__box-item">
+            <i class='bx bx-building-house dashboard__box-icon'></i>
+            <div class="dashboard__box-content">
+                <span class="dashboard__box-title">Số chung cư</span>
+                <span class="dashboard__box-value">@_apartmentCount căn</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="box box--warning dashboard__box-item">
+            <i class='bx bx-building dashboard__box-icon'></i>
+            <div class="dashboard__box-content">
+                <span class="dashboard__box-title">Số phòng</span>
+                <span class="dashboard__box-value">@_roomCount phòng</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="box box--success dashboard__box-item">
+            <i class='bx bx-building dashboard__box-icon'></i>
+            <div class="dashboard__box-content">
+                <span class="dashboard__box-title">Số phòng còn trống</span>
+                <span class="dashboard__box-value">@_roomNotIsRentCount phòng</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="box box--error dashboard__box-item">
+            <i class='bx bx-building dashboard__box-icon'></i>
+            <div class="dashboard__box-content">
+                <span class="dashboard__box-title">Số phòng đã cho thuê</span>
+                <span class="dashboard__box-value">@_roomIsRentCount phòng</span>
+            </div>
+        </div>
+    </div>
+</div>

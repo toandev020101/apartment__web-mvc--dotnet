@@ -1,0 +1,158 @@
+﻿@model IEnumerable<web_chung_cu.Models.Room>
+
+@{
+    ViewBag.Title = "Quản lý phòng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    int _page = (int)ViewData["page"];
+    int _limit = (int)ViewData["limit"];
+    string searchTerm = (string)ViewData["searchTerm"];
+    int status = (int)ViewData["status"];
+    int totalPage = (int)ViewData["totalPage"];
+}
+
+<h5>Quản lý phòng</h5>
+
+<div class="box">
+    @*header*@
+    <div class="table__header">
+        <div class="table__header-left">
+            <form action="@Url.Action("Index", "Room", new {_page = _page - 1, _limit = _limit, searchTerm=searchTerm})" class="select__form">
+                <select class="form-select form-select-sm select__input" aria-label="Trạng thái" name="status">
+                    <option value="-1" @(status == -1 ? "selected" : "")>-- Chọn trạng thái --</option>
+                    <option value="1" @(status == 1 ? "selected" : "")>Còn trống</option>
+                    <option value="0" @(status == 0 ? "selected" : "")>Đã cho thuê</option>
+                </select>
+            </form>
+        </div>
+        <div class="table__header-right">
+            <form action="@Url.Action("Index", "Room", new {_page = _page - 1, _limit = _limit, searchTerm=searchTerm})">
+                <div class="input-group input-group-sm flex-nowrap">
+                    <input type="text" class="form-control" placeholder="Nhập số phòng" name="searchTerm" value="@searchTerm" aria-label="searchTerm" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <i class="bx bx-search-alt"></i>
+                    </span>
+                </div>
+            </form>
+
+            <button type="button" class="btn btn-primary btn-sm">
+                <a href="@Url.Action("Add", "Room")" class="table__header-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    <span>Thêm</span>
+                </a>
+            </button>
+        </div>
+    </div>
+    @*header*@
+
+    @*table*@
+    <div class="table__content">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" width="30px">ID</th>
+                    <th scope="col">Ảnh phòng</th>
+                    <th scope="col" width="80px">Số phòng</th>
+                    <th scope="col" width="80px">Số tầng</th>
+                    <th scope="col">Tiêu đề</th>
+                    <th scope="col">Đường dẫn</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Giá cọc</th>
+                    <th scope="col" width="100px">Trạng thái</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.LongCount() > 0)
+                {
+                    foreach (var room in Model)
+                    {
+                        <tr>
+                            <td>@room.id</td>
+                            <td width="100px">
+                                <img src="~/Content/uploads/@room.imageName" alt="@room.roomNumber"class="table__content-image" />
+                            </td>
+                            <td>@room.roomNumber</td>
+                            <td>@room.floorNumber</td>
+                            <td>@room.title</td>
+                            <td>@room.slug</td>
+                            <td>@room.price</td>
+                            <td>@room.pricePile</td>
+                            <td>
+                                <span class="@(room.status == 1 ? "status--success" : "status--error")">@(room.status == 1 ? "Còn trống" : "Đã cho thuê")</span>
+                            </td>
+                            <td>
+                                <div class="table__content-action">
+                                    <a href="@Url.Action("Edit", "Room", new { id = room.id })" class="menu__item-link table__content-edit" data-bs-toggle="tooltip" data-bs-title="Chỉnh sửa">
+                                        <i class="bx bx-edit-alt"></i>
+                                    </a>
+
+                                    <span class="menu__item-link table__content-delete" data-bs-toggle="tooltip" data-bs-title="Xóa">
+                                        <i class="bx bx-trash-alt" data-bs-toggle="modal" data-bs-target="#deleteModal"></i>
+                                    </span>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa phòng</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn chắc chắn muốn xóa phòng "@room.roomNumber" ?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="@Url.Action("Delete", "Room", new { id = room.id})" class="btn btn-primary btn-sm">Xác nhận</a>
+                                                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Hủy</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">
+                            <span class="table__content-empty">Không có dữ liệu</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (totalPage > 0)
+        {
+            <div class="table__pagination">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item @(_page == 1 ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "Room", new {_page = _page - 1, _limit = _limit, status=status, searchTerm=searchTerm})" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        @for (var i = 1; i <= totalPage; i++)
+                        {
+                            <li class="page-item  @(_page == i ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", "Room", new {_page = @i, _limit = _limit, status=status, searchTerm=searchTerm})">@i</a>
+                            </li>
+                        }
+                        <li class="page-item @(_page == totalPage ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "Room", new {_page = _page + 1, _limit = _limit, status=status, searchTerm=searchTerm})" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+    @*table*@
+</div>
+
+

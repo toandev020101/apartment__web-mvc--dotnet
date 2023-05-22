@@ -1,0 +1,51 @@
+﻿@model web_chung_cu.Models.Apartment
+
+@{
+    ViewBag.Title = "Chỉnh sửa một chung cư";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h5>Chỉnh sửa</h5>
+
+<form action="@Url.Action("Edit", "Apartment", Model.id)" method="post" class="box">
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3">
+        <div class="col-6">
+            <label for="name" class="form-label">Tên chung cư *</label>
+            <input class="form-control input__convert-to-slug @(ViewData.ModelState["name"] != null && ViewData.ModelState["name"].Errors.Count > 0 ? "is-invalid" : "")" name="name" id="name" value="@(Request.Form["name"] != null ? Request.Form["name"] : Model.name)">
+            @Html.ValidationMessageFor(a => a.name, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="slug" class="form-label">Đường dẫn *</label>
+            <input class="form-control input__slug @(ViewData.ModelState["slug"] != null && ViewData.ModelState["slug"].Errors.Count > 0 ? "is-invalid" : "")" name="slug" id="slug" value="@(Request.Form["slug"] != null ? Request.Form["slug"] : Model.slug)">
+            @Html.ValidationMessageFor(a => a.slug, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="address" class="form-label">Địa chỉ *</label>
+            <input class="form-control @(ViewData.ModelState["address"] != null && ViewData.ModelState["address"].Errors.Count > 0 ? "is-invalid" : "")" name="address" id="address" value="@(Request.Form["address"] != null ? Request.Form["address"] : Model.address)">
+            @Html.ValidationMessageFor(a => a.address, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="totalFloor" class="form-label">Tổng số tầng *</label>
+            <input type="number" min="0" max="99" class="form-control @(ViewData.ModelState["totalFloor"] != null && ViewData.ModelState["totalFloor"].Errors.Count > 0 ? "is-invalid" : "")" name="totalFloor" id="floorNumber" value="@(Request.Form["totalFloor"] != null ? Request.Form["totalFloor"] : Model.totalFloor.ToString())">
+            @Html.ValidationMessageFor(a => a.totalFloor, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="totalRoom" class="form-label">Tổng số phòng *</label>
+            <input type="number" min="0" max="99" class="form-control @(ViewData.ModelState["totalRoom"] != null && ViewData.ModelState["totalRoom"].Errors.Count > 0 ? "is-invalid" : "")" name="totalRoom" id="totalRoom" value="@(Request.Form["totalRoom"] != null ? Request.Form["totalRoom"] : Model.totalRoom.ToString())">
+            @Html.ValidationMessageFor(a => a.totalRoom, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <input hidden name="status" value="@Model.status" />
+    </div>
+
+    <div class="btn__wrapper">
+        <button type="submit" class="btn btn-primary btn-sm">Chỉnh sửa</button>
+        <a href="@Url.Action("Index", "Apartment")" class="btn btn-danger btn-sm">Hủy</a>
+    </div>
+</form>

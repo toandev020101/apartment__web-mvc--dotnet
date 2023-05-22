@@ -1,0 +1,60 @@
+﻿@model web_chung_cu.Models.User
+
+@{
+    ViewBag.Title = "Thêm một tài khoản";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h5>Thêm mới</h5>
+
+<form action="@Url.Action("Add", "User")" method="post" class="box" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="row g-3">
+        <div class="col-6">
+            <label for="avatarImage" class="form-label">Ảnh đại diện *</label>
+            <input type="file" class="form-control @(ViewData.ModelState["avatarImage"] != null && ViewData.ModelState["avatarImage"].Errors.Count > 0 ? "is-invalid" : "")" name="avatarImage" id="avatarImage">
+            @Html.ValidationMessageFor(u => u.avatarImage, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="phoneNumber" class="form-label">Số điện thoại *</label>
+            <input class="form-control @(ViewData.ModelState["phoneNumber"] != null && ViewData.ModelState["phoneNumber"].Errors.Count > 0 ? "is-invalid" : "")" name="phoneNumber" id="phoneNumber" value="@Request.Form["phoneNumber"]">
+            @Html.ValidationMessageFor(u => u.phoneNumber, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="firstName" class="form-label">Họ *</label>
+            <input class="form-control  @(ViewData.ModelState["firstName"] != null && ViewData.ModelState["firstName"].Errors.Count > 0 ? "is-invalid" : "")" name="firstName" id="firstName" value="@Request.Form["firstName"]">
+            @Html.ValidationMessageFor(u => u.firstName, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="lastName" class="form-label">Tên *</label>
+            <input class="form-control  @(ViewData.ModelState["lastName"] != null && ViewData.ModelState["lastName"].Errors.Count > 0 ? "is-invalid" : "")" name="lastName" id="lastName" value="@Request.Form["lastName"]">
+            @Html.ValidationMessageFor(u => u.lastName, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="email" class="form-label">Email *</label>
+            <input class="form-control  @(ViewData.ModelState["email"] != null && ViewData.ModelState["email"].Errors.Count > 0 ? "is-invalid" : "")" name="email" id="email" value="@Request.Form["email"]">
+            @Html.ValidationMessageFor(u => u.email, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="col-6">
+            <label for="password" class="form-label">Mật khẩu *</label>
+            <div class="input__group">
+                <i class="bx bx-show-alt input__icon input__icon-password"></i>
+                <input type="password" class="form-control input__password  @(ViewData.ModelState["password"] != null && ViewData.ModelState["password"].Errors.Count > 0 ? "is-invalid" : "")" name="password" id="password" value="@Request.Form["password"]" />
+                @Html.ValidationMessageFor(u => u.password, "", new { @class = "invalid-feedback" })
+            </div>
+        </div>
+
+        <input class="input__password-confirm" name="confirmPassword" hidden />
+    </div>
+
+    <div class="btn__wrapper">
+        <button type="submit" class="btn btn-primary btn-sm">Thêm mới</button>
+        <a href="@Url.Action("Index", "User")" class="btn btn-danger btn-sm">Hủy</a>
+    </div>
+</form>

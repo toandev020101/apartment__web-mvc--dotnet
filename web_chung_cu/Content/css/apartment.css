@@ -1,0 +1,45 @@
+﻿.apartment__filter + .apartment__filter {
+    margin-top: 10px;
+}
+
+.apartment__filter-list {
+    font-size: 14px;
+    display: inline-block;
+}
+
+.apartment__filter-item:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.apartment__content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.apartment__content-total {
+    font-weight: 500;
+}
+
+.apartment__content-select {
+    max-width: 300px;
+}
+
+.apartment__content-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.apartment__content-list-empty {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.apartment__pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}

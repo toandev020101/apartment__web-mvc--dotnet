@@ -1,0 +1,110 @@
+﻿@using web_chung_cu.Models
+
+@{
+    User user = Session["user"] as User;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="@Url.Content("~/Content/images/logo_icon.png")" />
+    <title>@ViewBag.Title - Quản lý các hoạt động và chung cư</title>
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/boxicons-2.1.0/css/boxicons.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/_base.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/_adminLayout.css")" />
+</head>
+<body>
+    <div class="root">
+        @*sidebar*@
+        <nav class="left sidebar">
+            <div class="sidebar__header">
+                <a href="@Url.Action("Index", "Admin")" class="sidebar__header-logo">
+                    <img src="@Url.Content("~/Content/images/logo_icon.png")" alt="" class="sidebar__header-logo-icon" />
+                    <span class="text sidebar__header-logo-text">
+                        <span class="sidebar__header-logo-name">AparmentCity</span>
+                        <span class="sidebar__header-logo-desc">CHUNG CU</span>
+                    </span>
+                </a>
+
+                <i class="bx bx-chevron-left toggle sidebar__header-icon"></i>
+            </div>
+
+            <ul class="sidebar__menu">
+                <li class="nav-link menu__item active">
+                    <a href="@Url.Action("Index", "Admin")" class="menu__item-link">
+                        <i class="bx bx-grid-alt"></i>
+                        <span class="navbar-text text">Bảng điều khiển</span>
+                    </a>
+                </li>
+
+                <li class="nav-link menu__item">
+                    <a href="@Url.Action("Index", "Apartment")" class="menu__item-link">
+                        <i class="bx bx-building-house"></i>
+                        <span class="navbar-text text">Quản lý chung cư</span>
+                    </a>
+                </li>
+
+                <li class="nav-link menu__item">
+                    <a href="@Url.Action("Index", "Room")" class="menu__item-link">
+                        <i class="bx bx-building"></i>
+                        <span class="navbar-text text">Quản lý phòng</span>
+                    </a>
+                </li>
+
+                <li class="nav-link menu__item">
+                    <a href="@Url.Action("Index", "User")" class="menu__item-link">
+                        <i class="bx bx-user"></i>
+                        <span class="navbar-text text">Quản lý tài khoản</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar__line"></div>
+
+            <a href="@Url.Action("Logout", "Auth")" class="nav-link menu__item sidebar__logout">
+                <i class="bx bx-log-out"></i>
+                <span class="navbar-text text">Đăng xuất</span>
+            </a>
+        </nav>
+        @*sidebar*@
+
+        <div class="right">
+            @*header*@
+            <header class="header">
+                <div class="header__bage">
+                    <i class="bx bx-mail-send header__bage-icon"></i>
+                    <span class="header__bage-number">4</span>
+                </div>
+
+                <div class="header__bage">
+                    <i class="bx bx-bell header__bage-icon"></i>
+                    <span class="header__bage-number">4</span>
+                </div>
+
+                <div class="header__user">
+                    <img src="~/Content/@(user.avatar != null ? "uploads/" + user.avatar : "images/no-avatar.png")" alt="avatar.jpg" class="header__user-avatar" />
+                    <span>@(user.FullName())</span>
+                </div>
+            </header>
+            @*header*@
+
+            <main class="content">
+                @RenderBody()
+            </main>
+
+            <footer class="footer">
+                &copy; Lập trình bởi toan_2051220154
+            </footer>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.6.4.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/_base.js")"></script>
+    <script src="@Url.Content("~/Content/js/_adminLayout.js")"></script>
+</body>
+</html>

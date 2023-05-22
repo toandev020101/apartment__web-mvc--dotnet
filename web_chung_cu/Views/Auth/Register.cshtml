@@ -1,0 +1,55 @@
+﻿@model web_chung_cu.Models.User
+@{
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/register.css")" type="text/css" />
+
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+
+}
+
+<form action="@Url.Action("Register", "Auth")" method="post" class="form">
+    @Html.AntiForgeryToken()
+
+    <span class="form__icon-wrapper">
+        <i class="bx bx-user form__icon"></i>
+    </span>
+
+    <div class="form__content">
+        <div class="form__group">
+            <div class="form-group">
+                <input class="form-control @(ViewData.ModelState["firstName"] != null && ViewData.ModelState["firstName"].Errors.Count > 0 ? "is-invalid" : "")" name="firstName" placeholder="Họ *" value="@Request.Form["firstName"]" />
+                @Html.ValidationMessageFor(u => u.firstName, "", new { @class = "invalid-feedback" })
+            </div>
+
+            <div class="form-group">
+                <input class="form-control @(ViewData.ModelState["lastName"] != null && ViewData.ModelState["lastName"].Errors.Count > 0 ? "is-invalid" : "")" name="lastname" placeholder="Tên *" value="@Request.Form["lastName"]"/>
+                @Html.ValidationMessageFor(u => u.lastName, "", new { @class = "invalid-feedback" })
+            </div>
+        </div>
+
+        <input class="form-control @(ViewData.ModelState["phoneNumber"] != null && ViewData.ModelState["phoneNumber"].Errors.Count > 0 ? "is-invalid" : "")" name="phoneNumber" placeholder="Số điện thoại *" value="@Request.Form["phoneNumber"]"/>
+        @Html.ValidationMessageFor(u => u.phoneNumber, "", new { @class = "invalid-feedback" })
+
+        <input type="email" class="form-control @(ViewData.ModelState["email"] != null && ViewData.ModelState["email"].Errors.Count > 0 ? "is-invalid" : "")" name="email" placeholder="Email *" value="@Request.Form["email"]" />
+        @Html.ValidationMessageFor(u => u.email, "", new { @class = "invalid-feedback" })
+
+        <div class="input__group">
+            <i class="bx bx-show-alt input__icon input__icon-password"></i>
+            <input type="password" class="form-control input__password @(ViewData.ModelState["password"] != null && ViewData.ModelState["password"].Errors.Count > 0 ? "is-invalid" : "")" name="password" placeholder="Mật khẩu *" value="@Request.Form["password"]" />
+            @Html.ValidationMessageFor(u => u.password, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <div class="input__group">
+            <i class="bx bx-show-alt input__icon input__icon-password"></i>
+            <input type="password" class="form-control input__password @(ViewData.ModelState["confirmPassword"] != null && ViewData.ModelState["confirmPassword"].Errors.Count > 0 ? "is-invalid" : "")" name="confirmPassword" placeholder="Nhập lại mật khẩu *" value="@Request.Form["confirmPassword"]" />
+            @Html.ValidationMessageFor(u => u.confirmPassword, "", new { @class = "invalid-feedback" })
+        </div>
+
+        <button type="submit" class="btn btn-primary form__btn">Đăng ký</button>
+    </div>
+
+    <div class="form__auth">
+        <span>Bạn đã có tài khoản ?</span>
+        <a href="@Url.Action("Login", "Auth")" class="form__auth-link">Đăng nhập</a>
+    </div>
+</form>

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<web_chung_cu.Models.User>
+@using web_chung_cu.Models
+
+@{
+    ViewBag.Title = "Quản lý tài khoản";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    int _page = (int)ViewData["page"];
+    int _limit = (int)ViewData["limit"];
+    string searchTerm = (string)ViewData["searchTerm"];
+    int totalPage = (int)ViewData["totalPage"];
+
+    User currentUser = Session["user"] as User;
+}
+
+<h5>Quản lý tài khoản</h5>
+
+<div class="box">
+    @*header*@
+    <div class="table__header">
+        <div class="table__header-left">
+
+        </div>
+        <div class="table__header-right">
+            <form action="@Url.Action("Index", "User", new {_page = _page - 1, _limit = _limit, searchTerm=searchTerm})">
+                <div class="input-group input-group-sm flex-nowrap">
+                    <input type="text" class="form-control" placeholder="Nhập tên hoặc email" name="searchTerm" value="@searchTerm" aria-label="searchTerm" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="addon-wrapping">
+                        <i class="bx bx-search-alt"></i>
+                    </span>
+                </div>
+            </form>
+
+            <button type="button" class="btn btn-primary btn-sm">
+                <a href="@Url.Action("Add", "User")" class="table__header-btn">
+                    <i class="bx bx-plus-circle"></i>
+                    <span>Thêm</span>
+                </a>
+            </button>
+        </div>
+    </div>
+    @*header*@
+
+    @*table*@
+    <div class="table__content">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" width="30px">ID</th>
+                    <th scope="col">Ảnh đại diện</th>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Số điện thoại</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.LongCount() > 0)
+                {
+                    foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.id</td>
+                            <td width="100px">
+                                <img src="~/Content/@(user.avatar != null ? "uploads/" + user.avatar : "images/no-avatar.png")" alt="@user.FullName()" class="table__content-image" />
+                            </td>
+                            <td>@user.FullName()</td>
+                            <td>@user.phoneNumber</td>
+                            <td>@user.email</td>
+                            <td>
+                                <div class="table__content-action">
+                                    <a href="@Url.Action("Edit", "User", new { id = user.id })" class="menu__item-link table__content-edit" data-bs-toggle="tooltip" data-bs-title="Chỉnh sửa">
+                                        <i class="bx bx-edit-alt"></i>
+                                    </a>
+
+                                    @if (currentUser.id != user.id)
+                                    {
+                                        <span class="menu__item-link table__content-delete" data-bs-toggle="tooltip" data-bs-title="Xóa">
+                                            <i class="bx bx-trash-alt" data-bs-toggle="modal" data-bs-target="#deleteModal@(user.id)"></i>
+                                        </span>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="deleteModal@(user.id)" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa tài khoản</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn chắc chắn muốn xóa tài khoản "@user.email" ?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="@Url.Action("Delete", "User", new { id = user.id})" class="btn btn-primary btn-sm">Xác nhận</a>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Hủy</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal -->
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">
+                            <span class="table__content-empty">Không có dữ liệu</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (totalPage > 0)
+        {
+            <div class="table__pagination">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item @(_page == 1 ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "User", new {_page = _page - 1, _limit = _limit, searchTerm=searchTerm})" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        @for (var i = 1; i <= totalPage; i++)
+                        {
+                            <li class="page-item  @(_page == i ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", "User", new {_page = @i, _limit = _limit, searchTerm=searchTerm})">@i</a>
+                            </li>
+                        }
+                        <li class="page-item @(_page == totalPage ? "disabled" : "")">
+                            <a class="page-link" href="@Url.Action("Index", "User", new {_page = _page + 1, _limit = _limit, searchTerm=searchTerm})" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+    @*table*@
+</div>
+
+
