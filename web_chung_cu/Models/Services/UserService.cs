@@ -23,8 +23,8 @@ namespace web_chung_cu.Models.Services
             }
             else
             {
-                result.Data = _db.Users.Where(u => u.FullName().ToString().Contains(searchTerm) || u.email.ToString().Contains(searchTerm)).OrderByDescending(a => a.id).Skip(page * limit).Take(limit).ToList();
-                result.TotalCount = _db.Users.Where(u => u.FullName().ToString().Contains(searchTerm) || u.email.ToString().Contains(searchTerm)).Count();
+                result.Data = _db.Users.Where(u => (u.firstName.ToString().Contains(searchTerm) || u.email.ToString().Contains(searchTerm))).OrderByDescending(a => a.id).Skip(page * limit).Take(limit).ToList();
+                result.TotalCount = _db.Users.Where(u => (u.firstName.ToString().Contains(searchTerm) || u.email.ToString().Contains(searchTerm))).Count();
             }
 
             return result;
